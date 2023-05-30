@@ -88,7 +88,7 @@
         }
 
         function goPrevious() {
-            var position = NFTs.indexOf(fullNFT.src.slice(43))
+            var position = NFTs.indexOf('.' + fullNFT.src.slice(43))
             if (position == 0) {
                 return
             } else if (position > 0) {
@@ -99,7 +99,7 @@
         }
 
         function goNext() {
-            var position = NFTs.indexOf(fullNFT.src.slice(43))
+            var position = NFTs.indexOf('.' + fullNFT.src.slice(43))
             if (position == NFTs.length - 1) {
                 return
             } else if (position < NFTs.length) {
