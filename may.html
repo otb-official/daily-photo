@@ -75,7 +75,7 @@
 
         function openFullNFT(NFT) {
             fullNFTBox.style.display = "flex"
-            var sourceNFT = NFT.slice(43)
+            var sourceNFT = '.' + NFT.slice(43)
             console.log(sourceNFT)
             fullNFT.src = sourceNFT
             var day = sourceNFT.slice(13, sourceNFT.indexOf(".j")) //Used to determine the day of the photo
