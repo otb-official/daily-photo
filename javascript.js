@@ -1,4 +1,4 @@
-const placeholderNFT = "file:///home/ontheblock/Desktop/daily-photo/Photos/stockImage.jpg";
+const placeholderNFT = "./Photos/stockImage.jpg" //"file:///home/ontheblock/Desktop/daily-photo/Photos/stockImage.jpg";
 const NFTPathway = "file:///home/ontheblock/Desktop/daily-photo/Photos/"
 
 var numNFTs = "";
