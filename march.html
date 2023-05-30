@@ -24,9 +24,8 @@
         <span class="previous" onclick="goPrevious()"><</span>
         <span class="next" onclick="goNext()">></span>
     </div>
-    <div id="spacing">
-        <div class="NFTs"></div>
-    </div>
+    <div id="spacing"></div>
+    <div class="NFTs" id="photos"></div>
     <script>
         var htmlMonth = document.title.slice(14);
         var heading = document.createElement("h1");
@@ -45,10 +44,21 @@
     <script src="./monthChecker.js"></script>
     <script>
         for (let x = 0; x < NFTs.length; x++) {
-            const element = '<img src="' + NFTs[x] + '" onclick="openFullNFT(this.src)" onerror="this.src=placeholderNFT">'
-            document.querySelector('.NFTs').innerHTML += element;
+            var photoContainer = document.createElement("div");
+            photoContainer.setAttribute("id", `container${x}`);
+            document.getElementById("photos").appendChild(photoContainer);
         }
 
+        for (let x = 0; x < NFTs.length; x++) {
+            var element = '<img src="' + NFTs[x] + '" onclick="openFullNFT(this.src)" onerror="this.src=placeholderNFT" '
+            element = element.substring(0, 101) + `id="img${x}">` + element.substring(101, element.length);
+            console.log(element)
+            document.querySelector(`#container${x}`).innerHTML += element;
+            var photoNum = document.createElement("p");
+            photoNum.innerHTML = x + 1;
+            document.getElementById(`img${x}`).after(photoNum);
+        }
+        
         var fullNFTBox = document.getElementById("fullNFTBox");
         var fullNFT = document.getElementById("fullNFT");
         
