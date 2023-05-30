@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./javascript.js"></script>
+    <meta name="viewport" content="width=device-width initial-scale=1.0 user-scalable=no">
+    <title>Daily Photo | June</title>
+  </head>
+  <body>
+    <div id="title">
+        <a href="index.html"><h1>The Daily Photo</h1></a>
+        <div id="monthBox"></div>
+    </div>
+    <div class="full-NFTs" id="fullNFTBox">
+        <div>
+            <img src="" id="fullNFT">
+            <div class="metadata">
+                <h2 id="date"></h2>
+                <p id="photoDescrip"></p>
+            </div>
+        </div>
+        <span onclick="closeFullNFT()">X</span>
+        <span class="previous" onclick="goPrevious()"><</span>
+        <span class="next" onclick="goNext()">></span>
+    </div>
+    <div id="spacing">
+        <div class="NFTs"></div>
+    </div>
+    <script>
+        var htmlMonth = document.title.slice(14);
+        var heading = document.createElement("h1");
+        var backwards = document.createElement("a");
+        var forwards = document.createElement("a");
+        backwards.setAttribute("href", "./may.html");
+        backwards.innerHTML = '<';
+        forwards.setAttribute("href", "./july.html");
+        forwards.innerHTML = '>';
+        heading.setAttribute("id", "photoMonth");
+        heading.innerHTML = htmlMonth;
+        document.getElementById("monthBox").appendChild(backwards)
+        document.getElementById("monthBox").appendChild(heading);
+        document.getElementById("monthBox").appendChild(forwards);
+    </script>
+    <script src="./monthChecker.js"></script>
+    <script>
+        for (let x = 0; x < NFTs.length; x++) {
+            const element = '<img src="' + NFTs[x] + '" onclick="openFullNFT(this.src)" onerror="this.src=placeholderNFT">'
+            document.querySelector('.NFTs').innerHTML += element;
+        }
+
+        var fullNFTBox = document.getElementById("fullNFTBox");
+        var fullNFT = document.getElementById("fullNFT");
+        
+        //Below is where i set the image descriptions        
+
+
+        function openFullNFT(NFT) {
+            fullNFTBox.style.display = "flex"
+            var sourceNFT = '.' + NFT.slice(43)
+            console.log(sourceNFT)
+            fullNFT.src = sourceNFT
+            var day = sourceNFT.slice(14, sourceNFT.indexOf(".j")) //Used to determine the day of the photo
+            document.getElementById("date").innerHTML = month + ' ' + day + ', 2023'; //Used to write the date of photo
+            document.getElementById("photoDescrip").innerHTML = photoDescription[Number(day) - 1] //Used to write description
+        }
+
+        function closeFullNFT() {
+            fullNFTBox.style.display = "none"
+        }
+
+        function goPrevious() {
+            var position = NFTs.indexOf('.' + fullNFT.src.slice(43))
+            if (position == 0) {
+                return
+            } else if (position > 0) {
+                fullNFT.src = NFTs[position - 1]
+                document.getElementById("date").innerHTML = month + ' ' + (position) + ', 2023'; //Allows the photo date to change when clicking arrow
+                document.getElementById("photoDescrip").innerHTML = photoDescription[position - 1]; //Allows the description to change when clicking arrow
+            }
+        }
+
+        function goNext() {
+            var position = NFTs.indexOf('.' + fullNFT.src.slice(43))
+            if (position == NFTs.length - 1) {
+                return
+            } else if (position < NFTs.length) {
+                fullNFT.src = NFTs[position + 1]
+                document.getElementById("date").innerHTML = month + ' ' + (position + 2) + ', 2023'; //Allows the photo date to change when clicking arrow
+                document.getElementById("photoDescrip").innerHTML = photoDescription[position + 1]; //Allows the description to change when clicking arrow
+            }
+        }
+    </script>
+  </body>
+</html>
